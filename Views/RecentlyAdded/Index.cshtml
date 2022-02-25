@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MarkFlixAWSApp.Models.Content>
+
+
+@{
+    ViewData["Title"] = "Recently Added";
+}
+
+<div class="row">
+        <h2>Recently Added Items</h2>
+</div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+        <thead>
+            <tr>  
+                <th></th>  
+                <th>Title</th>  
+                <th>Episode</th>
+                <th>Season</th>
+                @*<th>Library</th>*@
+                <th>Media Type</th> 
+                <th>Was Watched</th>  
+                @*<th>Guids</th>  *@
+                <th>Total Plays</th>  
+            </tr>
+        </thead>
+
+        <tbody>
+    @foreach (var d in Model)  
+    {  
+        <tr>  
+            <td>
+            @if (d.LibraryName == "Movies" || d.LibraryName == "Movies 4K")
+            {
+                <span data-feather="film"></span>
+            }
+            else if (d.LibraryName == "TV Shows") 
+            {
+                <span data-feather="tv"></span>
+            }
+            else
+            {
+                @d.LibraryName
+            }
+            </td>
+            <td>@d.Title</td> 
+            <td>@d.EpisodeTitle</td> 
+            <td>@d.SeasonTitle</td>
+            @*<td>@d.LibraryName</td>*@
+            <td>@d.MediaType</td>  
+            <td>@d.WasWatched</td>  
+@*            <td>
+                @foreach (var id in @d.Guids)
+                    {
+                    <p>@id</p>
+                    }
+             </td>  *@
+            <td>@d.TotalPlays</td>  
+        </tr>  
+    }  
+        </tbody>
+    
+
+    
+</table> 
+</div>
+
+</div>

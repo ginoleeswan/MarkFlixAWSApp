@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MarkFlixAWSApp.Models.User>
+
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="row  justify-content-center">
+    <div class="text-center">
+        <h1 class="display-4">Users</h1>
+    </div>
+    @foreach (var item in Model)
+    {
+       <div class="card bg-light m-3" style="max-width: 18rem; padding: 0px">
+
+
+           <div class="card-header">
+               <div class="row">
+                   <div class="col-10 my-auto">@Html.DisplayFor(modelItem => item.Name)</div>
+                    <div class="col-2"><img src="@Html.DisplayFor(modelItem => item.UserThumb)" width="30" height="30" style="border-radius: 20px" alt="user thumbnail" />  </div>
+               </div>
+           </div>
+                   
+                   
+           <div class="card-body">
+
+               <h6 class="card-title">Overseerr ID: @Html.DisplayFor(modelItem => item.UserId)</h6>     
+               <p class="card-text">Email: @Html.DisplayFor(modelItem => item.Email)</p>
+               <p class="card-text">Request Count: @Html.DisplayFor(modelItem => item.RequestCount)</p>
+               <a asp-controller="Users" asp-action="Requests" asp-route-userId="@item.UserId" class="btn btn-primary">Requests</a>
+               <a asp-controller="Users" asp-action="History" asp-route-userName="@item.Name" class="btn btn-primary">Watch History</a>
+
+           </div>
+       </div>
+    }
+</div>

@@ -1,0 +1,165 @@
+﻿@model IEnumerable<MarkFlixAWSApp.Models.Content>
+
+    
+@{
+    ViewData["Title"] = "User History";
+}
+<div class="row">
+    <div class="col">
+        <h2>History</h2>
+        <h3>@Model.First().WatchedBy</h3>
+    </div>
+    <div class="col text-end">
+     <a asp-controller="Users" asp-action="Index" class="btn btn-primary">
+        Back To Users
+     </a>
+    </div>
+</div>
+     @if (Model.Count() > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Parent Title</th>
+                    <th scope="col">Watched Status</th>
+                    <th scope="col">Percent Complete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model)
+                {
+                    @if (@d.WatchedStatus == 1)
+                    {
+                        <tr class="table-success" onclick="location.href = '@Url.Action("Media", "History",  new { ratingKey = @d.RatingKey })'" style="cursor:pointer">  
+                            <td>
+                                @if (d.MediaType == "movie")
+                                {
+                                    <span data-feather="film"></span>
+                                }
+                                else if (d.MediaType == "episode")
+                                {
+                                    <span data-feather="tv"></span>
+                                }
+                                else
+                                {
+                                    @d.MediaType
+                                }
+                            </td>
+
+                            <td>@d.Title</td>
+                            <td>@d.ParentTitle</td>  
+
+                            <td>
+                                @if (@d.WatchedStatus == 1)
+                                {
+                                    <span data-feather="check"></span>
+                                }
+                                else if (@d.WatchedStatus == 0.5)
+                                {
+                                    <span data-feather="clock"></span>
+                                }
+                                else
+                                {
+                                    <span data-feather="x"></span>
+                                }
+
+                            </td>
+
+                            <td>@d.PercentComplete%</td> 
+                        </tr>
+                    }
+                    else if (@d.WatchedStatus == 0.5)
+                    {
+                        <tr class="table-warning" onclick="location.href = '@Url.Action("Media", "History",  new { ratingKey = @d.RatingKey })'" style="cursor:pointer">  
+                            <td>
+                                @if (d.MediaType == "movie")
+                                {
+                                    <span data-feather="film"></span>
+                                }
+                                else if (d.MediaType == "episode")
+                                {
+                                    <span data-feather="tv"></span>
+                                }
+                                else
+                                {
+                                    @d.MediaType
+                                }
+                            </td>
+
+                            <td>@d.Title</td>
+                            <td>@d.ParentTitle</td>  
+
+                            <td>
+                                @if (@d.WatchedStatus == 1)
+                                {
+                                    <span data-feather="check"></span>
+                                }
+                                else if (@d.WatchedStatus == 0.5)
+                                {
+                                    <span data-feather="clock"></span>
+                                }
+                                else
+                                {
+                                    <span data-feather="x"></span>
+                                }
+
+                            </td>
+
+                            <td>@d.PercentComplete%</td> 
+
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr class="table-danger" onclick="location.href = '@Url.Action("Media", "History",  new { ratingKey = @d.RatingKey })'" style="cursor:pointer">  
+                            <td>
+                                @if (d.MediaType == "movie")
+                                {
+                                    <span data-feather="film"></span>
+                                }
+                                else if (d.MediaType == "episode")
+                                {
+                                    <span data-feather="tv"></span>
+                                }
+                                else
+                                {
+                                    @d.MediaType
+                                }
+                            </td>
+
+                            <td>@d.Title</td>
+                            <td>@d.ParentTitle</td>  
+
+
+                            <td>
+                                @if (@d.WatchedStatus == 1)
+                                {
+                                    <span data-feather="check"></span>
+                                }
+                                else if (@d.WatchedStatus == 0.5)
+                                {
+                                    <span data-feather="clock"></span>
+                                }
+                                else
+                                {
+                                    <span data-feather="x"></span>
+                                }
+
+                            </td>           
+
+                            <td>@d.PercentComplete%</td> 
+                        </tr>
+                    }
+                }  
+          </tbody>
+        </table>
+      </div>
+
+      }
+      @if (Model.Count().Equals(0)) 
+      {
+        <p>No History</p>
+          }

@@ -1,0 +1,150 @@
+﻿@model IEnumerable<MarkFlixAWSApp.Models.User>
+
+    
+@{
+    ViewData["Title"] = "Media History";
+}
+<div class="row">
+    <div class="col">
+        <h2>Watch History</h2>
+        <h3>@Model.First().MediaWatchedTitle</h3>   
+    </div>
+    <div class="col text-end">
+     <a asp-controller="Users" asp-action="Index" class="btn btn-primary">
+        Back To Users
+     </a>
+    </div>
+</div>
+      
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+           <th scope="col"></th>
+              <th scope="col">Name</th>
+              <th scope="col">User ID</th>
+              <th scope="col">Watched Status</th>
+              <th scope="col">Percent Complete</th>
+            </tr>
+          </thead>
+          <tbody>
+             @foreach (var d in Model)  
+                {  
+                    @if (@d.WatchedStatus == 1)
+                            {
+                                <tr class="table-success" onclick="location.href = '@Url.Action("Index", "Users")'" style="cursor:pointer">  
+                                    <td>
+                                    @if (d.MediaType == "movie")
+                                    {
+                                        <span data-feather="film"></span>
+                                    }
+                                    else if (d.MediaType == "episode") 
+                                    {
+                                        <span data-feather="tv"></span>
+                                    }
+                                    else
+                                    {
+                                        @d.MediaType 
+                                    }
+                                    </td>
+
+                                    <td>@d.Name</td>
+                                    <td>@d.UserId</td>  
+
+                                        <td>
+                                        @if (@d.WatchedStatus == 1)
+                                        {
+                                            <span data-feather="check"></span>
+                                        }
+                                        else if (@d.WatchedStatus == 0.5) {
+                                            <span data-feather="clock"></span>
+                                        }
+                                        else {
+                                            <span data-feather="x"></span>
+                                        }
+
+                                        </td>
+                      
+                                    <td>@d.PercentComplete%</td> 
+                                   
+                                </tr>  
+                            }
+                            else if (@d.WatchedStatus == 0.5) {
+                                 <tr class="table-warning" onclick="location.href = '@Url.Action("Index", "Users")'" style="cursor:pointer">  
+                                    <td>
+                                    @if (d.MediaType == "movie")
+                                    {
+                                        <span data-feather="film"></span>
+                                    }
+                                    else if (d.MediaType == "episode") 
+                                    {
+                                        <span data-feather="tv"></span>
+                                    }
+                                    else
+                                    {
+                                        @d.MediaType 
+                                    }
+                                    </td>
+
+                                    <td>@d.Name</td>
+                                    <td>@d.UserId</td>  
+
+                                        <td>
+                                        @if (@d.WatchedStatus == 1)
+                                        {
+                                            <span data-feather="check"></span>
+                                        }
+                                        else if (@d.WatchedStatus == 0.5) {
+                                            <span data-feather="clock"></span>
+                                        }
+                                        else {
+                                            <span data-feather="x"></span>
+                                        }
+
+                                        </td>
+                      
+                                    <td>@d.PercentComplete%</td> 
+
+                                </tr> 
+                            }
+                            else {
+                                   <tr class="table-danger" onclick="location.href = '@Url.Action("Index", "Users")'" style="cursor:pointer">  
+                                    <td>
+                                    @if (d.MediaType == "movie")
+                                    {
+                                        <span data-feather="film"></span>
+                                    }
+                                    else if (d.MediaType == "episode") 
+                                    {
+                                        <span data-feather="tv"></span>
+                                    }
+                                    else
+                                    {
+                                        @d.MediaType 
+                                    }
+                                    </td>
+
+                                    <td>@d.Name</td>
+                                    <td>@d.UserId</td>  
+
+                                        <td>
+                                        @if (@d.WatchedStatus == 1)
+                                        {
+                                            <span data-feather="check"></span>
+                                        }
+                                        else if (@d.WatchedStatus == 0.5) {
+                                            <span data-feather="clock"></span>
+                                        }
+                                        else {
+                                            <span data-feather="x"></span>
+                                        }
+
+                                        </td>
+                      
+                                    <td>@d.PercentComplete%</td> 
+                                </tr> 
+                            } 
+                }  
+          </tbody>
+        </table>
+      </div>
