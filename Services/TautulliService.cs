@@ -178,7 +178,7 @@ namespace MarkFlixAWSApp.Services
 
         public async Task<IEnumerable<Content>?> GetAllWatchHistory()
         {
-            var response = await _httpClient.GetAsync($"?apikey={_apiKey}&cmd=get_history&length=30");
+            var response = await _httpClient.GetAsync($"?apikey={_apiKey}&cmd=get_history&length=10");
 
             response.EnsureSuccessStatusCode();
 

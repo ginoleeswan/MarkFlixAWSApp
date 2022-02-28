@@ -11,15 +11,12 @@ namespace MarkFlixAWSApp.Services
 
         private readonly HttpClient _httpClient;
         private readonly ITheMovieDBService _theMovieDBService;
-        private readonly ITautulliService _tautulliService;
 
         public OverseerrService(HttpClient httpClient, 
-            ITheMovieDBService theMovieDBService,
-            ITautulliService tautulliService)
+            ITheMovieDBService theMovieDBService)
         {
             _httpClient = httpClient;
             _theMovieDBService = theMovieDBService;
-            _tautulliService = tautulliService;
         }
 
         public async Task<IEnumerable<User>?> GetUsers()
